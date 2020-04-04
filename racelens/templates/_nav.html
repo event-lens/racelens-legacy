@@ -25,10 +25,10 @@
               {% comment %} {% if user|is_staff %} {% endcomment %}
               <a href=""><button class="btn btn-light">Crear evento</button></a>
               {% comment %} {% endif %} {% endcomment %}
-              <a href=""><button class="btn btn-dark">Cerrar sesión</button></a>
+              <a href="{% url 'users:logout' %}"><button class="btn btn-dark">Cerrar sesión</button></a>
           {% else %}
-              <a href=""><button class="btn btn-dark">Registrate</button></a>
-              <a href=""><button class="btn btn-light">Inicia Sesión</button></a>
+              <a href="{% url 'users:register'%} "><button class="btn btn-dark">Registrate</button></a>
+              <a href="{% url 'users:login'%} "><button class="btn btn-light">Inicia Sesión</button></a>
           {% endif %}
           </div>                     
       </div>                 
