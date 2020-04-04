@@ -22,6 +22,7 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^oauth/', include('social_django.urls', namespace='social')),
-    path('', views.HomeView.as_view(), name="home"),
+    # path('', views.HomeView.as_view(), name="home"),
     path('users/', include('users.urls', namespace="users")),
+    path('', include('recognition.urls', namespace="recognition"))
 ]
