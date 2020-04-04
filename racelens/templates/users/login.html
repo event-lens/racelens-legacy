@@ -16,14 +16,14 @@
 
     <div class="container mt-2">
     {% if title == "Iniciar sesión" %}
-        <div class="my-2"><a href=""><button class="btn text-light" style="background-color:#3b5998"><i class="fab fa-facebook-f"></i> Inicia Sesión con Facebook</button></a></div>
-        <div class="my-2"><a href=""><button class="btn text-light" style="background-color:#fc4c02"><i class="fab fa-strava"></i> Inicia Sesión con Strava</button></a></div>        
+        <div class="my-2"><a href="{% url 'social:begin' 'facebook' %}"><button class="btn text-light" style="background-color:#3b5998"><i class="fab fa-facebook-f"></i> Inicia Sesión con Facebook</button></a></div>
+        <div class="my-2"><a href="{% url 'social:begin' 'strava' %}"><button class="btn text-light" style="background-color:#fc4c02"><i class="fab fa-strava"></i> Inicia Sesión con Strava</button></a></div>        
 
         <hr class="hr-text" data-content="¿No tienes una cuenta?">
         <div class="my-2"><a href=""><button class="btn btn-secondary">Registrate</button></a></div>
     {% else %}
-        <div class="my-2"><a href=""><button class="btn text-light" style="background-color:#3b5998"><i class="fab fa-facebook-f"></i> Registrate con Facebook</button></a></div>
-        <div class="my-2"><a href=""><button class="btn text-light" style="background-color:#fc4c02"><i class="fab fa-strava"></i> Registrate con Strava</button></a></div>
+        <div class="my-2"><a href="{% url 'social:begin' 'facebook' %}"><button class="btn text-light" style="background-color:#3b5998"><i class="fab fa-facebook-f"></i> Registrate con Facebook</button></a></div>
+        <div class="my-2"><a href="{% url 'social:begin' 'strava' %}"><button class="btn text-light" style="background-color:#fc4c02"><i class="fab fa-strava"></i> Registrate con Strava</button></a></div>
         <hr class="hr-text" data-content="¿Ya tienes una cuenta?">
         <a href=""><button class="btn btn-secondary">Iniciar sesión</button></a>
     {% endif %}    
