@@ -3,31 +3,32 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top"> 
   <div class="container">
-      <a class="navbar-brand" href="{% url 'recognition:index' %}"><img src="{% static 'logo.svg' %}" height="50px"></a> 
+      <a class="navbar-brand" href=""><img src="{% static 'logo.svg' %}" height="50px"></a> 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler10" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation"> 
           <span class="navbar-toggler-icon"></span> 
       </button>                 
       <div class="collapse navbar-collapse" id="navbarToggler10"> 
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0"> 
               <li class="nav-item"> 
-                  <a class="nav-link" href="{% url 'recognition:index' %}">Inicio <span class="sr-only">(current)</span></a> 
+                  <a class="nav-link" href="">Inicio <span class="sr-only">(current)</span></a> 
               </li>                         
               <li class="nav-item"> 
-                  <a class="nav-link" href="{% url 'recognition:events' %}">Eventos</a> 
+                  <a class="nav-link" href="">Eventos</a> 
               </li>                   
               <li class="nav-item"> 
-                  <a href="{% url 'recognition:contact' %}" class="nav-link">Contacto</a> 
+                  <a href="" class="nav-link">Contacto</a> 
               </li>                          
           </ul>                     
           <div id="register-buttons" class="text-center">
           {% if user.is_authenticated %}
-              {% if user|is_staff %}
-              <a href="{% url 'recognition:create_event' %}"><button class="btn btn-light">Crear evento</button></a>
-              {% endif %}
-              <a href="{% url 'users:logout' %}"><button class="btn btn-dark">Cerrar sesión</button></a>
+          <!-- TODO Fix links -->
+              {% comment %} {% if user|is_staff %} {% endcomment %}
+              <a href=""><button class="btn btn-light">Crear evento</button></a>
+              {% comment %} {% endif %} {% endcomment %}
+              <a href=""><button class="btn btn-dark">Cerrar sesión</button></a>
           {% else %}
-              <a href="{% url 'users:register' %}"><button class="btn btn-dark">Registrate</button></a>
-              <a href="{% url 'users:login' %}"><button class="btn btn-light">Inicia Sesión</button></a>
+              <a href=""><button class="btn btn-dark">Registrate</button></a>
+              <a href=""><button class="btn btn-light">Inicia Sesión</button></a>
           {% endif %}
           </div>                     
       </div>                 
