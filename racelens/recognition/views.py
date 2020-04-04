@@ -15,7 +15,7 @@ rekognition = boto3.client("rekognition")
 
 # Check if user is staff
 def is_member(user):
-    return user.groups.filter(name='staff').exists()
+    return user.profile.is_organization
 
 def error_404(request, exception):
     return render(request, 'errors.html', {'error': 'La pagina que buscabas no existe.'})
