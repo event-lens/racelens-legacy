@@ -5,7 +5,13 @@ from django.urls import reverse
 
 class GeneralTest(TestCase):
     def test_home_page(self):
-        response = self.client.get('/')
+        response = self.client.get(reverse('recognition:index'))
+        self.assertEqual(response.status_code, 200)
+
+
+class EventsTest(TestCase):
+    def test_event_page_ok(self):
+        response = self.client.get(reverse('recognition:events'))
         self.assertEqual(response.status_code, 200)
 
 
@@ -24,4 +30,4 @@ class ProtectedUrlsTest(TestCase):
     def test_create_event_route_normal_user(self):
         self.client.post(reverse('users:login'), {'username': 'user-2', 'password': 'user-2'})
         response = self.client.get(reverse('recognition:create_event'))
-        self.assertEqual(response.status_code, 305)
+        self.assertEqual(response.status_code, 302)
