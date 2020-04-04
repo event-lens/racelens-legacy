@@ -118,7 +118,7 @@ def uploadSelfie(request, slug):
     else:
         form = UploadSelfie()
 
-    return render(request, "selfie.html", {"form": form, "event": event})
+    return render(request, "recognition/selfie.html", {"form": form, "event": event})
 
 
 @login_required
