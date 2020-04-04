@@ -1,0 +1,39 @@
+{% load static %}
+{% load bootstrap4 %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="Race Lens - Fotografias para eventos">
+        <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+        <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+        <title>Race Lens</title>
+        <!-- Bootstrap -->
+        {% bootstrap_css %}
+        {% bootstrap_javascript jquery='full' %}
+        <!-- Custom styles for this template -->
+        <link href="{% static 'css/product.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bree+Serif">
+    </head>
+    <body>
+
+        {% include '_nav.html' %}
+
+        <div style="min-height: 70vh;">
+        {% block content %}
+        {% endblock content %}
+        </div>
+
+        {% include '_footer.html' %}
+
+        
+        <script src="https://kit.fontawesome.com/f8c0a8ae18.js" crossorigin="anonymous"></script>
+
+        <!-- Custom css -->
+        {% block js %}
+        {% endblock js %}
+    </body>
+</html>

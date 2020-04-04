@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="position-relative overflow-hidden text-center bg-light d-flex align-items-center mt-auto" id="background-main" style="background-image: url('{% static 'runners.jpg' %}'); background-size: cover; height: 70vh;">
+    <div class="col-md-5 p-lg-5 mx-auto my-5">
+        <h1 class="display-4 font-weight-normal" style="color: #ffffff;"><bold style="color: #1967cc; font-weight: bold;">Race</bold> Lens</h1>
+        <p class="lead font-weight-normal" style="color: #ffffff;">Fotografias para tus eventos</p>
+        <a class="btn btn-light" href="">Buscar eventos</a>
+    </div>
+</div>
+<div class="jumbotron jumbotron-fluid text-center py-3">
+    <h1 class="display-4 py-3">¿Cómo funciona?</h1>
+</div>
+<!-- Steps -->
+<div class="container-fluid">
+    <div class="row d-flex align-items-center text-center py-5 px-5">
+        <div class="col-lg-4 col-md-3">
+            <img alt="selfie" src="{% static 'selfie.svg' %}" class="img-fluid">
+        </div>
+        <div class="col-lg-8 col-md-9">
+            <h1><span style="color: #1967cc;">1.</span> Tómate una selfie</h1>
+            <p>Asegurate de tener tu cara despejada y ser el unico en la foto.</p>
+        </div>
+    </div>
+    <div class="row d-flex align-items-center text-center py-5 px-5 bg-dark text-light">
+        <div class="col-lg-8 col-md-9">
+            <h1>2. Sube tu foto</h1>
+        </div>
+        <div class="col-lg-4 col-md-3">
+            <img alt="upload" src="{% static 'upload.svg' %}" class="img-fluid"> 
+        </div>
+    </div>
+    <div class="row d-flex align-items-center text-center py-5 px-5">
+        <div class="col-lg-4 col-md-3">
+            <img alt="search" src="{% static 'search.svg' %}" class="img-fluid"> 
+        </div>
+        <div class="col-lg-8 col-md-9">
+            <h1><span style="color: #1967cc;">3.</span> Buscamos tus fotos</h1>
+            <p>Nuestra tecnología de reconocimiento facial busca todas las fotos en donde aparezcas.</p>
+        </div>
+    </div>
+    <div class="row d-flex align-items-center text-center py-5 px-5 bg-dark text-light">
+        <div class="col-lg-8 col-md-9">
+            <h1>4. Te entregamos tus fotos</h1>
+        </div>
+        <div class="col-lg-4 col-md-3">
+            <img alt="fotos" src="{% static 'fotos.svg' %}" class="img-fluid">
+        </div>
+    </div>
+    <div class="row d-flex align-items-center text-center py-5 px-5">
+        <div class="col-lg-4 col-md-3">
+            <img alt="share" src="{% static 'social-share.svg' %}" class="img-fluid">
+        </div>
+        <div class="col-lg-8 col-md-9">
+            <h1><span style="color: #1967cc;">5.</span> Compártelas</h1>
+        </div>
+    </div>
+</div>
+<div class="container text-center">
+    <button class="btn btn-lg btn-primary">Busca tus fotos</button>
+</div>
+<!-- End steps -->
+<div class="container-fluid bg-light text-center mt-5 py-3">
+    <div class="container">
+        <h1>¿Tienes un evento?</h1>
+        <a href=""><button class="btn btn-info">Pide más información</button></a>
+        <hr>
+        <div>
+            <span class="text-muted">Redes Sociales</span>
+            <p class="lead">
+                <a href="https://www.facebook.com/RaceLens"><i class="fab fa-facebook-f fa-lg"></i></a>
+            </p>
+
+            <span class="text-muted">Correo:</span>
+            <p class="lead">contacto@racelens.io</p>
+
+            <span class="text-muted">Telefono:</span>
+            <p class="lead">8443685925</p>  
+        </div>
+        
+    </div>
+</div>
+{% endblock content %}
