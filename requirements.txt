@@ -4,3 +4,4 @@ django-bootstrap4==1.1.1
 boto3==1.12.36
 django-storages==1.9.1
 social-auth-app-django==3.1.0
+psycopg2==2.8.4
