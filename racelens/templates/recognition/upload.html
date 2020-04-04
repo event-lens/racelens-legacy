@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% load bootstrap4 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{% block content %}
+
+<div class="pb-2 mt-4 mb-3 border-bottom container">
+      <h1>Publicar fotos</h1>
+</div>
+
+<div class="container">
+    <form method="POST" enctype="multipart/form-data" id="images_form">
+        {% csrf_token %}
+        <div class="input-group">
+            
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" name="image" accept="image/*" required="true" id="id_image" multiple="multiple">
+                <label class="custom-file-label" for="id_image">Elegir archivos</label>
+            </div>
+        </div>
+        <div class="text-center pt-2">
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </div>
+    </form> 
+</div>
+
+
+<div class="container-fluid mt-5">
+    <div class="row d-flex justify-content-center" id="image-list">
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block js %}
+<script>
+var code = '<div class="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-2 py-2 text-center"><div class="card"><img src="" alt="" class="img-fluid card-img-top" style="height: 150px"><div class="card-body text-center" style="display:none;"><div class="spinner-border text-dark" role="status" style="display:none"><span class="sr-only">Loading...</span></div><span class="finish" style="display:none">✔️</span></div></div></div>';
+var image_list = []
+var token = $("[name=csrfmiddlewaretoken]").val();
+
+
+$("#id_image").change(function(e) {
+    image_list = []
+    $("#image-list").html("")
+    for (var file = 0; file <= e.target.files.length; file++){
+        var new_image = $(code)
+        new_image.find('img').attr("src", window.URL.createObjectURL(e.target.files[file]))
+        image_list.push(new_image)
+        $("#image-list").append(new_image)
+    }
+})
+
+$("#images_form").submit(function(e) {
+    e.preventDefault()
+    var files = $("#id_image").get(0).files
+    for (var i = 0; i < files.length; i++){
+        sendForm(file=files[i], index=i)
+    }
+})
+
+function sendForm(file, index) {
+    console.log(index)
+    var current_image = image_list[index]
+    current_image.find(".card-body").show()
+    current_image.find(".spinner-border").show()
+    var formdata = new FormData()
+    formdata.append("image", file)
+    $.ajax({
+        method: "POST",
+        headers: {
+        'X-CSRFToken': token 
+        },
+        data: formdata,
+        processData: false,
+        contentType: false,
+        success:function(){
+            current_image.find(".spinner-border").hide()
+            current_image.find(".finish").show()
+        },
+        // error:function(x){console.log(x)}
+    })
+}
+
+</script>
+{% endblock js %}

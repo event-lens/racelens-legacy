@@ -77,7 +77,7 @@ def uploadPhoto(request, slug):
     else:
         form = UploadForm(request.user)
 
-    return render(request, "upload.html", {"form": form})
+    return render(request, "recognition/upload.html", {"form": form})
 
 
 
