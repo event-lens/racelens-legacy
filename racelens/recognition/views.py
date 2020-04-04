@@ -148,7 +148,7 @@ def get_event(request, slug):
     return render(request, 'add_event.html', {'event': event})
 
 def list_events(request):
-    return render(request, 'events.html', {'events': Event.objects.all()})
+    return render(request, 'recognition/events_list.html', {'events': Event.objects.all()})
 
 def contact(request):
     if request.method == "POST":
