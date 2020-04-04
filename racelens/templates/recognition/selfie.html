@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load static %}
+{% comment %} {% load auth_check %} {% endcomment %}
+
+{% block content %}
+
+<div class="pb-2 mt-4 mb-2 border-bottom container">
+    <div class="row">
+        <h1 class="col-lg-9 col-md-7 col-sm-5 col-xs-12 my-auto text-center text-sm-left ext-md-left text-lg-left">{{ event.event_name }}</h1>
+        {% if user|is_event_owner:event %}
+            <a href="{% url 'recognition:upload_event' event.slug %}"><button class="btn btn-secondary">Subir fotos al evento</button></a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="container-fluid text-center">
+    <div class="conatiner pt-3">
+        <img id="preview" class="img-fluid rounded" style="max-height:60vh" src="{% static "upload-placeholder.svg" %}" alt="placeholder">
+    </div>
+    
+    <div class="container pt-3">
+        <form method="POST" enctype="multipart/form-data" id="selfie_form">
+            {% csrf_token %}
+            <label for="id_image">
+                <input type="file" id="id_image" name="image" accept="image/*" style="display:none">
+                <button class="btn btn-dark" id="image_btn" aria-hidden="true">
+                    <i class="fas fa-camera"></i>
+                    ¡Tómate una selfie!
+                </button>
+            </label>
+            <button type="submit" class="btn btn-outline-dark">Buscar</button>
+        </form>
+    </div>
+    
+
+    <div class="container pt-3">
+        <div id="loading_status" style="display: none;">
+            <p>Buscando...</p>
+            <div role="status" class="text-primary spinner-grow"> 
+                <span class="sr-only">Loading...</span> 
+            </div>                 
+        </div>
+    </div>
+    
+    
+    <div id="errors" class="container text-center">
+
+    </div>
+
+
+    <div class="container-fluid pt-3">
+        <div class="row" id="images-result">
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+            <img src="" id="imagepreview" class="img-fluid rounded">
+                
+            <div class="modal-footer">
+                <a id="download_picture" href="" target="_blank"><i class="fas fa-download fa-lg" style="position:absolute; left: 20px; bottom: 27px;color:#212529;"></i></a>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fas fa-times fa-lg"></i></button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+
+
+<script>
+$("#image_btn").click(function(event) {
+    event.preventDefault()
+    $("#id_image").click()
+})
+
+$("#id_image").change(function() {
+    $("#preview").attr("src", window.URL.createObjectURL(this.files[0])) 
+    // console.log(this.files[0])
+})
+
+$("#selfie_form").submit(function(event) {
+    event.preventDefault()
+    $("#images-result").html("")
+    $("#errors").html("")
+    // console.log("Form sumbitted")
+    create_post()
+})
+
+$("#images-result").on("click", event => {
+   // console.log(event.target) 
+
+   $("#imagepreview").attr("src", event.target.src)
+   $("#download_picture").attr("href", event.target.src)
+   $("#imagemodal").modal()
+})
+
+
+function create_post() {
+    $("#selfie_form").hide()
+    $("#loading_status").show()
+
+    var data = new FormData($('#selfie_form').get(0));
+
+    $.ajax({
+        type: "POST",
+        data: data,
+        cache: false,
+        processData: false,
+        contentType: false,
+        success: function(data) {
+            if (data.length == 0){
+                $("#errors").append($("<h1>No se encontraron resultados</h1>"))
+            } else {
+               data.forEach(image => {
+                    prep_image = $('<img class="img-fluid rounded">').attr("src", image)
+                    prep_div = $('<div class="col-md-3 pb-2 image-modal"></div>').append(prep_image)
+                    $("#images-result").append(prep_div)
+                })
+            }
+            $("#selfie_form").show()
+            $("#loading_status").hide() 
+        }
+    });
+    return false;
+};
+
+</script>
+
+{% endblock content %}

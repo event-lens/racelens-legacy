@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+
+{% if form %}
+<div class="container text-center pt-3">
+    <h1>Crear evento</h1>
+    <hr>
+</div>
+<div class="container">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button type="submit" class="btn btn-primary">Crear evento</button>
+    </form>
+</div>
+
+{% else %}
+<h1>{{ event.event_name }}</h1>
+{% for photo in event.photo_set.all %}
+<p>{{ photo.imageId }}</p>
+{% endfor %}
+{% endif %}
+
+{% endblock content %}

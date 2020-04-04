@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">Eventos</h1>
+    </div>
+</section>
+<div class="album py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            {% for event in events %}
+            <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                    <img class="card-img-top" src="{{ event.poster.url }}"/>
+                    <div class="card-body">
+                        <h4 class="card-text">
+                            {{ event.event_name }}
+                        </h4>
+                        <!--<p>19/01/2020</p>-->
+                        <a href="{% url 'recognition:get_event' event.slug %}" class="stretched-link"><button class="btn btn-primary">Ver evento</button></a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            
+        </div>
+    </div>
+</div>
+{% endblock content %}
