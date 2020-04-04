@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'bootstrap4',
+    'social_django',
 
     # Custom Apps
     'users',
@@ -46,6 +47,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'racelens.urls'
@@ -63,6 +65,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends', 
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -85,6 +89,7 @@ if production:
             'PORT': '5432',
         }
     }
+    SOCIAL_AUTH_POSTGRES_JSONFIELD = True
 else:
     DATABASES = {
         'default': {
@@ -112,6 +117,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.strava.StravaOAuth',
+)
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -166,3 +176,11 @@ EMAIL_HOST_USER = config('EMAIL_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_PASSWORD')
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
+
+# Social auth
+SOCIAL_AUTH_FACEBOOK_KEY = config('FB_KEY')
+SOCIAL_AUTH_FACEBOOK_SECRET = config('FB_SECRET')
+SOCIAL_AUTH_STRAVA_KEY = config('STRAVA_KEY')
+SOCIAL_AUTH_STRAVA_SECRET = config('STRAVA_SECRET')
+
+LOGIN_REDIRECT_URL = '/'
