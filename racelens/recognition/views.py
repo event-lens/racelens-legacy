@@ -140,7 +140,7 @@ def create_event(request):
     else:
         form = CreateEvent()
 
-    return render(request, "add_event.html", {"form": form})
+    return render(request, "recognition/create_event.html", {"form": form})
 
 
 def get_event(request, slug):
