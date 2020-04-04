@@ -37,6 +37,7 @@ INSTALLED_APPS = [
 
     # Custom Apps
     'users',
+    'recognition',
 ]
 
 MIDDLEWARE = [
