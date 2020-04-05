@@ -1,0 +1,18 @@
+version: '3.1'
+
+services:
+    psql:
+        image: postgres:12.2-alpine
+        restart: always
+        environment:
+            POSTGRES_USER: racelens
+            POSTGRES_PASSWORD: racelens
+        ports: 
+            - "5432:5432"
+    
+    redis:
+        image: redis:5.0.8-alpine
+        ports:
+            - "6379:6379"
+
+    
