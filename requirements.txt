@@ -1,4 +1,4 @@
-Django==3.0.5
+Django==3.0.7
 python-decouple==3.3
 django-bootstrap4==1.1.1
 boto3==1.12.36
